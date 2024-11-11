@@ -1,0 +1,11 @@
+to start socket server
+
+cd websocket_server && npm install
+
+to run server
+npn run start or node server.js
+
+then run app on emulator
+
+flutter sdk = 3.24.1
+dart sdk = 3.24.1
