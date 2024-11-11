@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   // signalling server url
-  final String websocketUrl = "ws://localhost:8080";
+  final String websocketUrl = "ws://192.168.1.104:5000";
 
   // generate callerID of local user
   final String selfCallerID =
@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
 
     // return material app
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       darkTheme: ThemeData.dark().copyWith(
         useMaterial3: true,
         colorScheme: const ColorScheme.dark(),

@@ -61,65 +61,74 @@ class _HomeScreenState extends State<HomeScreen> {
             Center(
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextField(
-                      controller: TextEditingController(
-                        text: widget.selfCallerId,
-                      ),
-                      style: TextStyle(color: Colors.black),
-                      readOnly: true,
-                      textAlign: TextAlign.center,
-                      enableInteractiveSelection: false,
-                      decoration: InputDecoration(
-                        labelText: "Your Caller ID",
-                        labelStyle: TextStyle(color: Colors.black),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
+                child: Card(
+                  color: Colors.black,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextField(
+                          controller: TextEditingController(
+                            text: widget.selfCallerId,
+                          ),
+                          readOnly: true,
+                          textAlign: TextAlign.center,
+                          enableInteractiveSelection: false,
+                          decoration: InputDecoration(
+                            labelText: "Your Caller ID",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 12),
-                    TextField(
-                      controller: remoteCallerIdTextEditingController,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: "Remote Caller ID",
-                        hintStyle: TextStyle(color: Colors.black),
-                        alignLabelWithHint: true,
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(style: BorderStyle.solid,color: Colors.black),
-                          borderRadius: BorderRadius.circular(10.0),
+                      const SizedBox(height: 12),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextField(
+                          controller: remoteCallerIdTextEditingController,
+                          textAlign: TextAlign.center,
+                          decoration: InputDecoration(
+                            hintText: "Remote Caller ID",
+                            alignLabelWithHint: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 24),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        side: const BorderSide(color: Colors.white30),
-                      ),
-                      child: const Text(
-                        "Invite",
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white,
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            side: const BorderSide(color: Colors.white30),
+                          ),
+                          child: const Text(
+                            "Invite",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                            ),
+                          ),
+                          onPressed: () {
+                            _joinCall(
+                              callerId: widget.selfCallerId,
+                              calleeId: remoteCallerIdTextEditingController.text,
+                            );
+                          },
                         ),
                       ),
-                      onPressed: () {
-                        _joinCall(
-                          callerId: widget.selfCallerId,
-                          calleeId: remoteCallerIdTextEditingController.text,
-                        );
-                      },
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
             if (incomingSDPOffer != null)
               Positioned(
                 child: ListTile(
+                  tileColor: Colors.black,
                   title: Text(
                     "Incoming Call from ${incomingSDPOffer["callerId"]}",
                   ),
@@ -142,6 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             calleeId: widget.selfCallerId,
                             offer: incomingSDPOffer["sdpOffer"],
                           );
+                          setState(() => incomingSDPOffer = null);
                         },
                       )
                     ],
